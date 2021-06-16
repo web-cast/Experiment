@@ -1,0 +1,30 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "g++",  // 调试会话开始前执行的任务，一般为编译程序，c++为g++, c为gcc
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileBasenameNoExtension}.exe"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        // "focus": false,
+        "focus": true,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+    }
+}
