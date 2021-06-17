@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include<time.h>
 
-typedef struct Bstnode{         //Bstæ ‘èŠ‚ç‚¹ç»“æ„ä½“
+typedef struct Bstnode{         //Bst½Úµã½á¹¹Ìå
     int data;
     struct Bstnode *left;
     struct Bstnode *right;
 }Bstnode;
 
-void insert(Bstnode *root, int item)            //Bstæ ‘çš„å»ºç«‹ï¼ˆé€šè¿‡æ’å…¥ï¼‰
+void insert(Bstnode *root, int item)            //Bst²åÈë½¨Á¢
 {
     Bstnode *parent=NULL, *current=root, *p;
     while(current!=NULL)
@@ -35,7 +35,7 @@ void insert(Bstnode *root, int item)            //Bstæ ‘çš„å»ºç«‹ï¼ˆé€šè¿‡æ’å…¥
         parent->right=p;
 }
 
-int inorder_traversal(Bstnode *root)            //ä¸­åºé€’å½’éå†
+int inorder_traversal(Bstnode *root)            //ÖĞĞò±éÀú
 {
     if(root==NULL){
         return 0;
@@ -45,7 +45,7 @@ int inorder_traversal(Bstnode *root)            //ä¸­åºé€’å½’éå†
     inorder_traversal(root->left);
 }
 
-int search(Bstnode *root, int item)             //BSTæ•°æŸ¥æ‰¾èŠ‚ç‚¹
+int search(Bstnode *root, int item)             //BST²éÕÒ½Úµã
 {
     int n=1;
     Bstnode *p=root;
@@ -60,18 +60,18 @@ int search(Bstnode *root, int item)             //BSTæ•°æŸ¥æ‰¾èŠ‚ç‚¹
         n++;
     }
     if(p->data==item){
-        printf("æŸ¥æ‰¾æˆåŠŸï¼Œæ“ä½œæ¬¡æ•°ä¸ºï¼š%d\n",n);
+        printf("²éÕÒ³É¹¦£¬²Ù×÷´ÎÊıÎª%d!\n",n);
     }
     else{
-        printf("ä¸å­˜åœ¨è¯¥èŠ‚ç‚¹ï¼Œæ“ä½œæ¬¡æ•°ä¸º%d!\n",n);
+        printf("²éÕÒÊ§°Ü£¬²Ù×÷´ÎÊıÎª%d!\n",n);
     }
     return n;
 }
 
-int delete(Bstnode *root, int item, int n)             //BSTæ ‘åˆ é™¤èŠ‚ç‚¹
+int delete(Bstnode *root, int item, int n)             //BST½ÚµãÉ¾³ı
 {
     if(root==NULL){
-        printf("è¯·å…ˆå»ºç«‹äºŒå‰æ ‘ï¼\n");
+        printf("ÇëÏÈ½¨Á¢BSTÊ÷\n");
         return 0;
     }
     Bstnode *p=root, *parent=NULL, *t;
@@ -124,18 +124,18 @@ int main()
     int i = 0,A[50], s, n=0; 
     Bstnode *root=NULL;
 	for(i = 0; i < 50; ++i){
-		A[i]=(int) (round(1.0 * rand() / RAND_MAX * 800 + 200));            //äº§ç”Ÿ200åˆ°1000ä¹‹é—´çš„éšæœºæ•°
+		A[i]=(int) (round(1.0 * rand() / RAND_MAX * 800 + 200));            //Ëæ»úÉú³É50¸ö200-1000ÄÚµÄÕûÊı
         insert(root, A[i]);
     }
-    printf("ä¸­åºéå†å¦‚ä¸‹ï¼š\n");
+    printf("ÖĞĞò±éÀúÈçÏÂ\n");
     inorder_traversal(root);
-    printf("\n\nè¯·è¾“å…¥éœ€è¦æŸ¥æ‰¾çš„å…³é”®å­—ï¼š");
+    printf("\n\nÇëÊäÈëĞèÒª²éÕÒµÄ¹Ø¼ü×Ö£º");
     scanf("%d",&s);
     search(root,s);
-    printf("è¯·è¾“å…¥éœ€è¦åˆ é™¤çš„å…³é”®å­—ï¼š");
+    printf("\nÇëÊäÈëĞèÒªÉ¾³ıµÄ¹Ø¼ü×Ö£º");
     scanf("%d",&s);
     n=delete(root,s,n);
-    printf("æ“ä½œæˆåŠŸï¼Œæ“ä½œæ¬¡æ•°ä¸º%d\n",n);
-    printf("\nä¸­åºéå†å¦‚ä¸‹ï¼š\n");
+    printf("²Ù×÷´ÎÊıÎª%d\n",n);
+    printf("\nÖĞĞò±éÀúÈçÏÂ\n");
     inorder_traversal(root);
 }
