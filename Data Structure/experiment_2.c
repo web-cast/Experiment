@@ -68,7 +68,7 @@ int search(Hash a[19],int item)             //哈希查找
     return i;
 }
 
-int delete(Hash a[19],int item)             //删除
+int Delete(Hash a[19],int item)             //删除
 {
     int n,i=1;
     Hash *p, *parent=NULL, *p1=NULL;
@@ -78,26 +78,7 @@ int delete(Hash a[19],int item)             //删除
     }
     else if(a[n].data=item){
         printf("\n查找成功！\n");
-        if(a[n].next==NULL){
-            a[n].data=-1;
-        }
-        else{
-            p=a[n].next;
-            a[n].data=p->next->data;
-            while(p->next!=NULL)
-            {
-                p->data=p->next->data;
-                p1=p;
-                p=p->next;
-            }
-            free(p);
-            if(p1==NULL){
-                a[n].next=NULL;
-            }
-            else{
-                p1->next=NULL;
-            }
-        }
+        a[n].data=-1;
     }
     else if(a[n].data!=-1 && a[n].data!=item ){
         if(a[n].next==NULL){
@@ -111,12 +92,8 @@ int delete(Hash a[19],int item)             //删除
                 if(p->data=item){
                     printf("\n查找成功\n");
                     if(parent==NULL){
-                        a[n].next=p->next;
+                        a[n].data=-1;
                     }
-                    else{
-                        parent->next=p->next;
-                    }
-                    break;
                 }
                 parent=p;
                 p=p->next;
@@ -132,7 +109,6 @@ int delete(Hash a[19],int item)             //删除
 
 int main()
 {
-    srand((unsigned)time(NULL));
     int i, A[50];
     Hash d[19];
     for(i=0;i<19;i++){              //哈希表的初始化
@@ -140,16 +116,16 @@ int main()
         d[i].next=NULL;
     }
     for(i = 0; i < 50; ++i){
-		A[i]=(int) (round(1.0 * rand() / RAND_MAX * 800 + 200));
+		A[i]=rand()%800+200; 
         add_data(d,A[i]);
     }
     printf("请输入需要查找的关键字：");
     scanf("%d",&i);
-    i=search(A,i);
+    i=search(d,i);
     printf("共操作%d次\n",i);
     printf("\n请输入要删除的关键字：");
     scanf("%d",&i);
-    i=delete(A,i);
+    i=Delete(d,i);
     printf("共操作%d次\n",i);
     return 0;
 }

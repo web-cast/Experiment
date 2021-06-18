@@ -27,7 +27,7 @@ void insert(Bstnode *root, int item)            //Bst插入建立
     p->left=NULL;
     p->right=NULL;
     if(parent==NULL){
-        root=parent;
+        root=p;
     }
     else if(parent->data>item)
         parent->left=p;
@@ -38,17 +38,22 @@ void insert(Bstnode *root, int item)            //Bst插入建立
 int inorder_traversal(Bstnode *root)            //中序遍历
 {
     if(root==NULL){
+        printf("1\n");
         return 0;
     }
     printf("%d ",root->data);
     inorder_traversal(root->right);
     inorder_traversal(root->left);
+    return 1;
 }
 
 int search(Bstnode *root, int item)             //BST查找节点
 {
     int n=1;
     Bstnode *p=root;
+    if(root=NULL){
+        return 0;
+    }
     while(p->data!=item)
     {
         if(p->data>item){
@@ -68,13 +73,13 @@ int search(Bstnode *root, int item)             //BST查找节点
     return n;
 }
 
-int delete(Bstnode *root, int item, int n)             //BST节点删除
+int Delete(Bstnode *root, int item, int n)             //BST节点删除
 {
+	Bstnode *p=root, *parent=NULL, *t;
     if(root==NULL){
         printf("请先建立BST树\n");
         return 0;
     }
-    Bstnode *p=root, *parent=NULL, *t;
     while(p->data!=item)
     {
         if(p->data>item){
@@ -113,18 +118,17 @@ int delete(Bstnode *root, int item, int n)             //BST节点删除
         t=p;
         for(p=p->right; p->left; p=p->left)
         t->data=p->data;
-        n=delete(t->right, t->data, n);
+        n=Delete(t->right, t->data, n);
     }
     return n;
 }
 
 int main()
 {
-    srand((unsigned)time(NULL));
     int i = 0,A[50], s, n=0; 
     Bstnode *root=NULL;
 	for(i = 0; i < 50; ++i){
-		A[i]=(int) (round(1.0 * rand() / RAND_MAX * 800 + 200));            //随机生成50个200-1000内的整数
+		A[i]=rand()%800+200;         //随机生成50个200-1000内的整数
         insert(root, A[i]);
     }
     printf("中序遍历如下\n");
@@ -134,7 +138,7 @@ int main()
     search(root,s);
     printf("\n请输入需要删除的关键字：");
     scanf("%d",&s);
-    n=delete(root,s,n);
+    n=Delete(root,s,n);
     printf("操作次数为%d\n",n);
     printf("\n中序遍历如下\n");
     inorder_traversal(root);

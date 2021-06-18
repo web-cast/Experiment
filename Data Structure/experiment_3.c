@@ -51,12 +51,13 @@ int quicksort(int a[], int high, int low)           //快速排序算法
             n++;
         }
     }
+    a[i]=temp;
     if(low<i) n=n+quicksort(a,i-1,low);
     if(high>j) n=n+quicksort(a,high,j+1);
     return n;
 }
 
-int creatheap(int a[], int n, int h)
+int creatheap(int a[], int n, int h)            //最大堆化
 {
     int i, j, flag, temp, num=0;
     i=h;
@@ -78,7 +79,7 @@ int creatheap(int a[], int n, int h)
     return num;
 }
 
-int Initcreatheap(int a[], int n)
+int Initcreatheap(int a[], int n)               //初始化最大堆
 {
     int i,num=0;
     for(i= (n-2)/2; i>=0; i--)
@@ -88,22 +89,39 @@ int Initcreatheap(int a[], int n)
     return num;
 }
 
-void heapsort(int a[],int n)                //堆查找
+int heapsort(int a[],int n)                //堆查找
 {
-    int num=0,i,temp;
+    int num=1,i,temp;
     Initcreatheap(a,n);
     for(i=n-1;i>0;i--){
+        num++;
         temp=a[i];
         a[i]=a[0];
         a[0]=temp;
-        creatheap(a, i, 0);                 //从上往下依次查找左右子数
+        creatheap(a, i, 0);                 //从上往下依次查找左右子树
     }
+    return num;
 }
 
 int main()
 {
-    srand((unsigned)time(NULL));
-    int i, A[50];
+    int i, A[50],numofd=3,d[3]={6,3,1},num;
     for(i = 0; i < 50; ++i){
-		A[i]=(int) (round(1.0 * rand() / RAND_MAX * 800 + 200));
+		A[i]=rand()%800+200; 
     }
+    num=shellsort(A,50,d,numofd);
+    printf("希尔排序共操作%d次\n",num);
+    for(i = 0; i < 50; ++i){
+		A[i]=rand()%9800+200; 
+    }
+    num=quicksort(A,49,0);
+    printf("快速排序共操作%d次\n",num);
+     for(i = 0; i < 50; ++i){
+		A[i]=rand()%9800+200; 
+    }
+    num=heapsort(A,49);
+    printf("堆排序共操作%d次\n",num);
+    return 0;
+}
+
+
