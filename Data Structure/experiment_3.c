@@ -24,13 +24,15 @@ int shellsort(int a[], int n, int d[], int numofd)              //希尔排序
     return num;
 }
 
-int quicksort(int a[], int high, int low)           //快速排序算法
+int quicksort(int a[], int low, int high)           //快速排序算法
 {
     int i=high, j=low;
     int temp=a[i], n=0;
+    printf("%d\n",1);
     while(i<j)
     {
-        while(i<j && temp<j) 
+        n+=5;
+        while(i<j && temp<=a[j])            //对右边进行处理
         {
             j--;
             n++;
@@ -40,7 +42,7 @@ int quicksort(int a[], int high, int low)           //快速排序算法
             i++;
             n++;
         }
-        while(i<j && temp>i) 
+        while(i<j && temp>a[i])             //对左边进行处理
         {
             i++;
             n++;
@@ -52,8 +54,9 @@ int quicksort(int a[], int high, int low)           //快速排序算法
         }
     }
     a[i]=temp;
-    if(low<i) n=n+quicksort(a,i-1,low);
-    if(high>j) n=n+quicksort(a,high,j+1);
+    printf("%d\n%d\n%d\n%d",i,j,low,high);
+    if(low<i) n=n+quicksort(a,low,i-1);
+    if(high>j) n=n+quicksort(a,i+1,high);
     return n;
 }
 
