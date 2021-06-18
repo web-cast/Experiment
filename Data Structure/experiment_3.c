@@ -101,7 +101,7 @@ int heapsort(int a[],int n)                //堆查找
         temp=a[i];
         a[i]=a[0];
         a[0]=temp;
-        creatheap(a, i, 0);                 //从上往下依次查找左右子树
+        num+=creatheap(a, i, 0);                 //从上往下依次查找左右子树
     }
     return num;
 }
@@ -109,10 +109,14 @@ int heapsort(int a[],int n)                //堆查找
 int main()
 {
     int i, A[50],numofd=3,d[3]={6,3,1},num;
+    printf("修改前：\n");
     for(i = 0; i < 50; ++i){
 		A[i]=rand()%800+200; 
+        printf("%d ",A[i]);
     }
+    printf("\n修改后：");
     num=shellsort(A,50,d,numofd);
+    for(i=0; i<50; i++) printf("%d ",A[i]);
     printf("希尔排序共操作%d次\n",num);
     for(i = 0; i < 50; ++i){
 		A[i]=rand()%9800+200; 

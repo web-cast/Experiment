@@ -8,7 +8,7 @@ typedef struct Bstnode{         //Bst节点结构体
     struct Bstnode *right;
 }Bstnode;
 
-void insert(Bstnode *root, int item)            //Bst插入建立
+/* void insert(Bstnode *root, int item)            //Bst插入建立
 {
     Bstnode *parent=NULL, *current=root, *p;
     while(current!=NULL)
@@ -33,6 +33,20 @@ void insert(Bstnode *root, int item)            //Bst插入建立
         parent->left=p;
     else
         parent->right=p;
+} */
+
+void insert(Bstnode *root, int item)
+{
+    if(root)
+    {
+        if(root->data>item) insert(root->left,item);
+        else insert(root->right,item);
+    }
+    else{
+        root=(Bstnode *)malloc(sizeof(Bstnode));
+        root->data=item;
+        root->right=root->left=NULL;
+    }
 }
 
 int inorder_traversal(Bstnode *root)            //中序遍历
@@ -129,7 +143,11 @@ int main()
     Bstnode *root=NULL;
 	for(i = 0; i < 50; ++i){
 		A[i]=rand()%800+200;         //随机生成50个200-1000内的整数
+        printf("%d ",A[i]);
         insert(root, A[i]);
+    }
+    if(root==NULL){
+        printf("%d\n",1999);
     }
     printf("中序遍历如下\n");
     inorder_traversal(root);
