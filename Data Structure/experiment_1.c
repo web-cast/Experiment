@@ -8,11 +8,14 @@ typedef struct Bstnode{         //Bst节点结构体
     struct Bstnode *right;
 }Bstnode;
 
-/* void insert(Bstnode *root, int item)            //Bst插入建立
+int insert(Bstnode **root, int item)            //Bst插入建立
 {
-    Bstnode *parent=NULL, *current=root, *p;
+    Bstnode *parent=NULL, *current=*root, *p;
     while(current!=NULL)
     {
+        if(current->data==item){
+            return 0;
+        }
         if(item>current->data){
             parent=current;
             current=current->right;
@@ -27,36 +30,37 @@ typedef struct Bstnode{         //Bst节点结构体
     p->left=NULL;
     p->right=NULL;
     if(parent==NULL){
-        root=p;
+        *root=p;
     }
     else if(parent->data>item)
         parent->left=p;
     else
         parent->right=p;
-} */
+    return 0;
+}
 
-void insert(Bstnode *root, int item)
+/* void insert(Bstnode **root, int item)
 {
-    if(root)
+    if(*root)
     {
-        if(root->data>item) insert(root->left,item);
-        else insert(root->right,item);
+        if((*root)->data>item) insert(&((*root)->left),item);
+        else insert(&((*root)->right),item);
     }
     else{
-        root=(Bstnode *)malloc(sizeof(Bstnode));
-        root->data=item;
-        root->right=root->left=NULL;
+        printf("\nroot为空\n");
+        (*root)=(Bstnode *)malloc(sizeof(Bstnode));
+        (*root)->data=item;
+        (*root)->right=(*root)->left=NULL;
     }
-}
+} */
 
 int inorder_traversal(Bstnode *root)            //中序遍历
 {
     if(root==NULL){
-        printf("1\n");
         return 0;
     }
-    printf("%d ",root->data);
     inorder_traversal(root->right);
+    printf("%d ",root->data);
     inorder_traversal(root->left);
     return 1;
 }
@@ -144,12 +148,9 @@ int main()
 	for(i = 0; i < 50; ++i){
 		A[i]=rand()%800+200;         //随机生成50个200-1000内的整数
         printf("%d ",A[i]);
-        insert(root, A[i]);
+        insert(&root, A[i]);
     }
-    if(root==NULL){
-        printf("%d\n",1999);
-    }
-    printf("中序遍历如下\n");
+    printf("\n\n中序遍历如下\n");
     inorder_traversal(root);
     printf("\n\n请输入需要查找的关键字：");
     scanf("%d",&s);
@@ -160,4 +161,5 @@ int main()
     printf("操作次数为%d\n",n);
     printf("\n中序遍历如下\n");
     inorder_traversal(root);
+    return 1;
 }

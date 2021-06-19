@@ -28,7 +28,6 @@ int quicksort(int a[], int low, int high)           //快速排序算法
 {
     int i=high, j=low;
     int temp=a[i], n=0;
-    printf("%d\n",1);
     while(i<j)
     {
         n+=5;
@@ -54,7 +53,6 @@ int quicksort(int a[], int low, int high)           //快速排序算法
         }
     }
     a[i]=temp;
-    printf("%d\n%d\n%d\n%d",i,j,low,high);
     if(low<i) n=n+quicksort(a,low,i-1);
     if(high>j) n=n+quicksort(a,i+1,high);
     return n;
