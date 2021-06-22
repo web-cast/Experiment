@@ -96,6 +96,7 @@ int Delete(Hash a[19],int item)             //删除
                     if(parent==NULL){
                         a[n].data=-1;
                     }
+                    break;
                 }
                 parent=p;
                 p=p->next;
@@ -122,18 +123,7 @@ int main()
 		A[i]=rand()%800+200; 
         add_data(d,A[i]);
         printf("%d ",A[i]);
-    }
-    printf("\n输入的数据为：\n");
-    for(i=0;i<19;i++){
-        printf("%d ",d[i].data);
-        if(d[i].next!=NULL){
-            p=d[i].next;
-            while(p!=NULL)
-            {
-                printf("%d ",p->data);
-                p=p->next;
-            }
-        }
+        if(i%10==9) printf("\n");
     }
     printf("\n请输入需要查找的关键字：");
     scanf("%d",&i);

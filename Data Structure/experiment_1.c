@@ -54,14 +54,14 @@ int insert(Bstnode **root, int item)            //Bst插入建立
     }
 } */
 
-int inorder_traversal(Bstnode *root)            //中序遍历
+int inorder_traversal(Bstnode *root, int i)            //中序遍历
 {
     if(root==NULL){
         return 0;
     }
-    inorder_traversal(root->right);
-    printf("%d ",root->data);
-    inorder_traversal(root->left);
+    inorder_traversal(root->left, i);
+    printf("%4d ",root->data);
+    inorder_traversal(root->right, i);
     return 1;
 }
 
@@ -145,13 +145,15 @@ int main()
 {
     int i = 0,A[50], s, n=0; 
     Bstnode *root=NULL;
+    printf("随机生成50个200-1000内的整数如下：\n");
 	for(i = 0; i < 50; ++i){
 		A[i]=rand()%800+200;         //随机生成50个200-1000内的整数
-        printf("%d ",A[i]);
+        printf("%d  ",A[i]);
         insert(&root, A[i]);
+        if(i%10==9) printf("\n");
     }
     printf("\n\n中序遍历如下\n");
-    inorder_traversal(root);
+    inorder_traversal(root, 0);
     printf("\n\n请输入需要查找的关键字：");
     scanf("%d",&s);
     search(root,s);
@@ -160,6 +162,6 @@ int main()
     n=Delete(root,s,n);
     printf("操作次数为%d\n",n);
     printf("\n中序遍历如下\n");
-    inorder_traversal(root);
+    inorder_traversal(root, 0);
     return 1;
 }
